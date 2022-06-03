@@ -328,6 +328,74 @@ def gradamin(eps,m,u,x0,y0,f,df1,df2):
     #return listx,listy
     return xn,yn
 
+
+def gradh1x(*args):
+    x = args[0]
+    y = args[1]
+    return - np.sin(x)*np.sin(y)
+
+def gradh2y(*args):
+    x = args[0]
+    y = args[1]
+    return np.cos(x)*np.cos(y)
+
+def gradg1x(*args):
+    x = args[0]
+    a = args[2]
+    return 2*x/a 
+
+
+def gradg2y(*args):
+    y = args[1]
+    b =args[3]
+    return 2*y/b
+#gradamin 
+
+def gradamin(eps, m, u, x0, y0, f, df1, df2):
+    
+    k=0
+    a=2
+    b=2/7
+    
+    x = x0
+    y = y0
+    n=0
+    xlst = []
+    ylst = []
+    
+    xlst.append(x)
+    ylst.append(y)
+    while((math.sqrt(df1(x,y,a,b)**2 + df2(x,y,a,b)**2)) >= eps or n<m):
+        k=1
+        gradx =df1(x,y,a,b)
+        grady= df2(x,y,a,b)
+        
+        F1 = f(x+ k*u*gradx, y+ k*u*grady,a,b)
+        F2 = f(x+ (k+1)*u*gradx, y+ (k+1)*u*grady,a,b)
+        l=0
+        while (F2 <F1 or l<m):
+            F1 = f(x+ k*u*gradx, y+ k*u*grady,a,b)
+            F2 = f(x+ (k+1)*u*gradx, y+ (k+1)*u*grady,a,b)
+            x = x + u*gradx
+            y = y + u*grady
+            ylst.append(y)
+            xlst.append(x)
+            k = k + 1
+            l=l+1
+          
+        n = n + 1
+      
+    print(xlst,ylst)
+    
+    plt.plot(xlst, ylst)
+    plt.show()
+    return xlst, ylst
+
+print(gradamin(1*10**-5, 100, -0.001, 7, 1.5, fonctiong, gradg1x, gradg2y))   
+#print(gradamin(1*10**-5, 120, -0.001, 0, 0, fonctionh, gradh1x, gradh2y))   
+#plt.plot(gradamax(1*10**-5, 40, -0.001, 0, 0, fonctionh, gradh1x, gradh2y))
+#plt.show()
+
 #print(gradamin(1*10**-4,200,-0.001,7,1.5,g,dgx1,dgy1))
 
 
