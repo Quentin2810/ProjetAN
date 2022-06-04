@@ -407,7 +407,6 @@ def gradamax(eps, m, u, x0, y0, f, df1, df2):
     n=0
     xlst = []
     ylst = []
-    nlst = []
     xlst.append(x)
     ylst.append(y)  
     while((math.sqrt(df1(x,y,a,b)**2 + df2(x,y,a,b)**2)) >= eps or n<m):
