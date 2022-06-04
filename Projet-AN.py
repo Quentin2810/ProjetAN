@@ -390,8 +390,8 @@ def gradamin(eps, m, u, x0, y0, f, df1, df2):
       
     print(xlst,ylst)
     
-    plt.plot(xlst, ylst)
-    plt.show()
+    pl.plot(xlst, ylst)
+    pl.show()
     return xlst, ylst
 #print(gradamin(1*10**-5, 100, -0.001, 7, 1.5, fonctiong, gradg1x, gradg2y))   
 #print(gradamin(1*10**-5, 120, -0.001, 0, 0, fonctionh, gradh1x, gradh2y))
@@ -430,8 +430,8 @@ def gradamax(eps, m, u, x0, y0, f, df1, df2):
         n = n + 1
       
     print(xlst,ylst)
-    plt.plot(xlst, ylst)
-    plt.show()
+    pl.plot(xlst, ylst)
+    pl.show()
     return xlst, ylst
 
 #print(gradamax(1*10**-5, 120, 0.001, 7, 1.5, fonctiong, gradg1x, gradg2y))   
