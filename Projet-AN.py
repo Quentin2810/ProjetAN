@@ -161,6 +161,13 @@ def g(x,y):
 def h(x,y):
     return cos(x)*sin(y)
 
+
+def fonctiong(x,y,a,b):
+    return x**2/a + y**2/b
+
+def fonctionh(x,y,a,b):
+    return np.cos(x)*np.sin(y)*a/b
+
 #represenation 3D des graphes de g
 def graphe3dG(a,b):
     x=np.linspace(-100,100,100)
