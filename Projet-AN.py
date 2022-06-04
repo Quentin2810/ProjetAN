@@ -393,7 +393,49 @@ def gradamin(eps, m, u, x0, y0, f, df1, df2):
     plt.plot(xlst, ylst)
     plt.show()
     return xlst, ylst
+#print(gradamin(1*10**-5, 100, -0.001, 7, 1.5, fonctiong, gradg1x, gradg2y))   
+#print(gradamin(1*10**-5, 120, -0.001, 0, 0, fonctionh, gradh1x, gradh2y))
 
+#chercher un maximum d'une fonction
+
+def gradamax(eps, m, u, x0, y0, f, df1, df2):
+    k=0
+    a=2
+    b=2/7
+    x = x0
+    y = y0
+    n=0
+    xlst = []
+    ylst = []
+    nlst = []
+    xlst.append(x)
+    ylst.append(y)  
+    while((math.sqrt(df1(x,y,a,b)**2 + df2(x,y,a,b)**2)) >= eps or n<m):
+        k=1
+        gradx =df1(x,y,a,b)
+        grady= df2(x,y,a,b)
+        
+        F1 = f(x+ k*u*gradx, y+ k*u*grady,a,b)
+        F2 = f(x+ (k+1)*u*gradx, y+ (k+1)*u*grady,a,b)
+        l=0
+        while (F2 > F1 or l<m):
+            F1 = f(x+ k*u*gradx, y+ k*u*grady,a,b)
+            F2 = f(x+ (k+1)*u*gradx, y+ (k+1)*u*grady,a,b)
+            x = x + u*gradx
+            y = y + u*grady
+            ylst.append(y)
+            xlst.append(x)
+            k = k + 1
+            l=l+1
+        n = n + 1
+      
+    print(xlst,ylst)
+    plt.plot(xlst, ylst)
+    plt.show()
+    return xlst, ylst
+
+#print(gradamax(1*10**-5, 120, 0.001, 7, 1.5, fonctiong, gradg1x, gradg2y))   
+#print(gradamax(1*10**-5, 120, 0.001, 0, 0, fonctionh, gradh1x, gradh2y))
 
 ################################"
 # Partie D
