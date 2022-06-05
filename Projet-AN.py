@@ -340,12 +340,13 @@ def gradpc(eps, m, u, x0, y0, df1, df2):
     pl.show()
         
     return lstabs, lstord
-'''        
 
-    
 
 #print(gradpc(0.0000001, 120, 0.001, 0, 0,gradh1x ,gradh2y))
 #print(gradpc(0.0000001, 120, -0.001, 7, 1.5,gradg1x ,gradg2y))
+'''        
+
+   
     
 
 #gradpc(1*10**-6,200,-0.001,0,0,dhx,dhy)
