@@ -335,9 +335,9 @@ def gradpc(eps, m, u, x0, y0, df1, df2):
         lstabs.append(x)
         n = n + 1
     
-    plt.plot(lstabs, lstord)
+    pl.plot(lstabs, lstord)
     
-    plt.show()
+    pl.show()
         
     return lstabs, lstord
         
