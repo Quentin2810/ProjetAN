@@ -380,9 +380,6 @@ def gradamin(eps, m, u, x0, y0, f, df1, df2):
         k=1
         gradx =df1(x,y,a,b)
         grady= df2(x,y,a,b)
-        
-        F1 = f(x+ k*u*gradx, y+ k*u*grady,a,b)
-        F2 = f(x+ (k+1)*u*gradx, y+ (k+1)*u*grady,a,b)
        
        
         F1 = f(x+ k*u*gradx, y+ k*u*grady,a,b)
@@ -398,25 +395,28 @@ def gradamin(eps, m, u, x0, y0, f, df1, df2):
             
         n= n+1
       
-    print(xlst,ylst)
-    pl.plot(nlst, error)
-    pl.xlim([-1, 130])
-    pl.ylim([0,55])
+    #print(xlst,ylst)
+    #pl.plot(nlst, error)
+    #pl.xlim([-1, 130])
+    #pl.ylim([0,55])
     
-    #plt.plot(xlst, ylst)
-    plt.show()
+    pl.plot(xlst, ylst)
+    pl.show()
     return xlst, ylst
 
-#print(gradamin(1*10**-5, 100, -0.01, 7, 1.5, fonctiong, gradg1x, gradg2y))   
+#print(gradamin(1*10**-5, 120, -0.01, 7, 1.5, fonctiong, gradg1x, gradg2y))   
 #print(gradamin(1*10**-5, 120, -0.01, 0, 0, fonctionh, gradh1x, gradh2y))   
 
+
 def grad():
-    listpas=[-0.2, -0.1,-0.01,-0.001,-0.001]
+    listpas=[ -0.99,-0.7, -0.6, -0.5, -0.4, -0.3, -0.1, -0.01, -0.001]
     for pas in listpas:
         #print(pas)
+        pl.title(pas)
         gradamin(1*10**-5,120,pas,7,1.5, fonctiong,gradg1x,gradg2y)
-        plt.title(pas)
+        
 grad()
+
 
 def gradamax(eps, m, u, x0, y0, f, df1, df2):
     
