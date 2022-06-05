@@ -364,8 +364,65 @@ def gradamin(eps,m,u,x0,y0,f,df1,df2):
 def gradamin(eps, m, u, x0, y0, f, df1, df2):
     
     k=0
-    a=2
-    b=2/7
+    a=1
+    b=20
+    error = []
+    x = x0
+    y = y0
+    n=0
+    xlst = []
+    ylst = []
+    minimum = 0
+    nlst=[]
+    xlst.append(x)
+    ylst.append(y)
+    while((math.sqrt(df1(x,y,a,b)**2 + df2(x,y,a,b)**2)) >= eps or n<m):
+        k=1
+        gradx =df1(x,y,a,b)
+        grady= df2(x,y,a,b)
+        
+        F1 = f(x+ k*u*gradx, y+ k*u*grady,a,b)
+        F2 = f(x+ (k+1)*u*gradx, y+ (k+1)*u*grady,a,b)
+       
+       
+        F1 = f(x+ k*u*gradx, y+ k*u*grady,a,b)
+        F2 = f(x+ (k+1)*u*gradx, y+ (k+1)*u*grady,a,b)
+        x = x + u*gradx
+        y = y + u*grady
+        error.append(math.fabs(f(x,y,a,b) - minimum))
+        ylst.append(y)
+        xlst.append(x)
+        nlst.append(n)
+        if F2<F1:
+            k = k +1
+            
+        n= n+1
+      
+    print(xlst,ylst)
+    pl.plot(nlst, error)
+    pl.xlim([-1, 130])
+    pl.ylim([0,55])
+    
+    #plt.plot(xlst, ylst)
+    plt.show()
+    return xlst, ylst
+
+#print(gradamin(1*10**-5, 100, -0.01, 7, 1.5, fonctiong, gradg1x, gradg2y))   
+#print(gradamin(1*10**-5, 120, -0.01, 0, 0, fonctionh, gradh1x, gradh2y))   
+
+def grad():
+    listpas=[-0.2, -0.1,-0.01,-0.001,-0.001]
+    for pas in listpas:
+        #print(pas)
+        gradamin(1*10**-5,120,pas,7,1.5, fonctiong,gradg1x,gradg2y)
+        plt.title(pas)
+grad()
+
+def gradamax(eps, m, u, x0, y0, f, df1, df2):
+    
+    k=0
+    a=1
+    b=20
     
     x = x0
     y = y0
@@ -382,66 +439,27 @@ def gradamin(eps, m, u, x0, y0, f, df1, df2):
         
         F1 = f(x+ k*u*gradx, y+ k*u*grady,a,b)
         F2 = f(x+ (k+1)*u*gradx, y+ (k+1)*u*grady,a,b)
-        l=0
-        while (F2 <F1 or l<m):
-            F1 = f(x+ k*u*gradx, y+ k*u*grady,a,b)
-            F2 = f(x+ (k+1)*u*gradx, y+ (k+1)*u*grady,a,b)
-            x = x + u*gradx
-            y = y + u*grady
-            ylst.append(y)
-            xlst.append(x)
-            k = k + 1
-            l=l+1
-          
-        n = n + 1
+       
+       
+        F1 = f(x+ k*u*gradx, y+ k*u*grady,a,b)
+        F2 = f(x+ (k+1)*u*gradx, y+ (k+1)*u*grady,a,b)
+        x = x + u*gradx
+        y = y + u*grady
+        
+        ylst.append(y)
+        xlst.append(x)
+        if F2>F1:
+            k = k +1
+        n= n+1
       
     print(xlst,ylst)
     
     pl.plot(xlst, ylst)
     pl.show()
     return xlst, ylst
-#print(gradamin(1*10**-5, 100, -0.001, 7, 1.5, fonctiong, gradg1x, gradg2y))   
-#print(gradamin(1*10**-5, 120, -0.001, 0, 0, fonctionh, gradh1x, gradh2y))
 
-#chercher un maximum d'une fonction
-
-def gradamax(eps, m, u, x0, y0, f, df1, df2):
-    k=0
-    a=2
-    b=2/7
-    x = x0
-    y = y0
-    n=0
-    xlst = []
-    ylst = []
-    xlst.append(x)
-    ylst.append(y)  
-    while((math.sqrt(df1(x,y,a,b)**2 + df2(x,y,a,b)**2)) >= eps or n<m):
-        k=1
-        gradx =df1(x,y,a,b)
-        grady= df2(x,y,a,b)
-        
-        F1 = f(x+ k*u*gradx, y+ k*u*grady,a,b)
-        F2 = f(x+ (k+1)*u*gradx, y+ (k+1)*u*grady,a,b)
-        l=0
-        while (F2 > F1 or l<m):
-            F1 = f(x+ k*u*gradx, y+ k*u*grady,a,b)
-            F2 = f(x+ (k+1)*u*gradx, y+ (k+1)*u*grady,a,b)
-            x = x + u*gradx
-            y = y + u*grady
-            ylst.append(y)
-            xlst.append(x)
-            k = k + 1
-            l=l+1
-        n = n + 1
-      
-    print(xlst,ylst)
-    pl.plot(xlst, ylst)
-    pl.show()
-    return xlst, ylst
-
-#print(gradamax(1*10**-5, 120, 0.001, 7, 1.5, fonctiong, gradg1x, gradg2y))   
-#print(gradamax(1*10**-5, 120, 0.001, 0, 0, fonctionh, gradh1x, gradh2y))
+#print(gradamax(1*10**-5, 120, 0.01, 0, 0, fonctionh, gradh1x, gradh2y))
+#print(gradamax(1*10**-5, 120, 0.001, 7, 1.5, fonctionh, gradg1x, gradg2y))
 
 ################################"
 # Partie D
