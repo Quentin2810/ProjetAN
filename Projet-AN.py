@@ -319,6 +319,34 @@ def gradpc(eps,m,u,x0,y0,df1,df2):
     #pl.plot(nlist,Errorlist)  #pour afficher la courbe d'erreur relatif pour g(1,20)
     pl.show()
     
+def gradpc(eps, m, u, x0, y0, df1, df2):
+    
+    lstabs = []
+    lstord = []
+    x = x0
+    a=2
+    b=2/7
+    y = y0 
+    n=0
+    while((math.sqrt(df1(x,y,a,b)**2 + df2(x,y,a,b)**2)) >= eps or n<m):
+        x = x + u*df1(x,y,a,b)
+        y = y + u*df2(x,y,a,b)
+        lstord.append(y)
+        lstabs.append(x)
+        n = n + 1
+    
+    plt.plot(lstabs, lstord)
+    
+    plt.show()
+        
+    return lstabs, lstord
+        
+
+    
+
+#print(gradpc(0.0000001, 120, 0.001, 0, 0,gradh1x ,gradh2y))
+#print(gradpc(0.0000001, 120, -0.001, 7, 1.5,gradg1x ,gradg2y))
+    
 
 #gradpc(1*10**-6,200,-0.001,0,0,dhx,dhy)
 #gradpc(1*10**-5,200,-0.001,7,1.5,dgx,dgy)
